@@ -57,7 +57,7 @@
 #define GPIOB_PIN0                  0U
 #define GPIOB_PIN1                  1U
 #define GPIOB_PIN2                  2U
-#define GPIOB_SWO                   3U
+#define GPIOB_PIN3                  3U
 #define GPIOB_PIN4                  4U
 #define GPIOB_PIN5                  5U
 #define GPIOB_PIN6                  6U
@@ -284,7 +284,7 @@
  * PB0  - GPIOB_PIN0                (input pullup).
  * PB1  - GPIOB_PIN1                (input pullup).
  * PB2  - GPIOB_PIN2                (input pullup).
- * PB3  - GPIOB_SWO                 (alternate 0).
+ * PB3  - GPIOB_PIN3                 (alternate 0).
  * PB4  - GPIOB_PIN4                (input pullup).
  * PB5  - GPIOB_PIN5                (input pullup).
  * PB6  - GPIOB_PIN6                (input pullup).
@@ -301,7 +301,7 @@
 #define VAL_GPIOB_MODER             (PIN_MODE_INPUT(GPIOB_PIN0) | \
                                      PIN_MODE_INPUT(GPIOB_PIN1) | \
                                      PIN_MODE_INPUT(GPIOB_PIN2) | \
-                                     PIN_MODE_ALTERNATE(GPIOB_SWO) | \
+                                     PIN_MODE_ALTERNATE(GPIOB_PIN3) | \
                                      PIN_MODE_INPUT(GPIOB_PIN4) | \
                                      PIN_MODE_INPUT(GPIOB_PIN5) | \
                                      PIN_MODE_INPUT(GPIOB_PIN6) | \
@@ -317,7 +317,7 @@
 #define VAL_GPIOB_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOB_PIN0) | \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN1) | \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN2) | \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_SWO) | \
+                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN3) | \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN4) | \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN5) | \
                                      PIN_OTYPE_PUSHPULL(GPIOB_PIN6) | \
@@ -333,7 +333,7 @@
 #define VAL_GPIOB_OSPEEDR           (PIN_OSPEED_100M(GPIOB_PIN0) | \
                                      PIN_OSPEED_100M(GPIOB_PIN1) | \
                                      PIN_OSPEED_100M(GPIOB_PIN2) | \
-                                     PIN_OSPEED_100M(GPIOB_SWO) | \
+                                     PIN_OSPEED_100M(GPIOB_PIN3) | \
                                      PIN_OSPEED_100M(GPIOB_PIN4) | \
                                      PIN_OSPEED_100M(GPIOB_PIN5) | \
                                      PIN_OSPEED_100M(GPIOB_PIN6) | \
@@ -349,7 +349,7 @@
 #define VAL_GPIOB_PUPDR             (PIN_PUPDR_PULLUP(GPIOB_PIN0) | \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN1) | \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN2) | \
-                                     PIN_PUPDR_PULLUP(GPIOB_SWO) | \
+                                     PIN_PUPDR_PULLUP(GPIOB_PIN3) | \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN4) | \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN5) | \
                                      PIN_PUPDR_PULLUP(GPIOB_PIN6) | \
@@ -365,7 +365,7 @@
 #define VAL_GPIOB_ODR               (PIN_ODR_LOW(GPIOB_PIN0) | \
                                      PIN_ODR_LOW(GPIOB_PIN1) | \
                                      PIN_ODR_LOW(GPIOB_PIN2) | \
-                                     PIN_ODR_LOW(GPIOB_SWO) | \
+                                     PIN_ODR_LOW(GPIOB_PIN3) | \
                                      PIN_ODR_LOW(GPIOB_PIN4) | \
                                      PIN_ODR_LOW(GPIOB_PIN5) | \
                                      PIN_ODR_LOW(GPIOB_PIN6) | \
@@ -381,7 +381,7 @@
 #define VAL_GPIOB_AFRL              (PIN_AFIO_AF(GPIOB_PIN0, 0) | \
                                      PIN_AFIO_AF(GPIOB_PIN1, 0) | \
                                      PIN_AFIO_AF(GPIOB_PIN2, 0) | \
-                                     PIN_AFIO_AF(GPIOB_SWO, 0) | \
+                                     PIN_AFIO_AF(GPIOB_PIN3, 0) | \
                                      PIN_AFIO_AF(GPIOB_PIN4, 0) | \
                                      PIN_AFIO_AF(GPIOB_PIN5, 0) | \
                                      PIN_AFIO_AF(GPIOB_PIN6, 0) | \

@@ -486,6 +486,8 @@
  */
 #define CH_CFG_SYSTEM_HALT_HOOK(reason) {                                   \
   /* System halt code here.*/                                               \
+  extern void panic_hook(const char *); \
+  panic_hook(reason); \
 }
 
 /** @} */

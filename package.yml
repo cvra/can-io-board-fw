@@ -1,0 +1,21 @@
+dependency-dir: ./src/
+
+include_directories:
+    - src
+
+source:
+    - src/cmp/cmp.c
+
+target.arm:
+    - src/board.c
+    - src/main.c
+    - src/mpu60X0.c
+
+depends:
+    - serial-datagram:
+        fork: stapelzeiger
+    - cmp_mem_access:
+        fork: stapelzeiger
+
+templates:
+    Makefile.include.jinja: src/src.mk

@@ -75,6 +75,9 @@ include $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v7m.mk
 # Other files (optional).
 #include $(CHIBIOS)/test/rt/test.mk
 
+PROJROOT = .
+include src/src.mk
+
 # Define linker script file here
 USE_BOOTLOADER = yes
 
@@ -93,12 +96,12 @@ CSRC = $(STARTUPSRC) \
        $(OSALSRC) \
        $(HALSRC) \
        $(PLATFORMSRC) \
-       src/board.c \
-       src/main.c
+       $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
+       $(PROJCSRC) src/arm-cortex-tools/fault.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
-CPPSRC =
+CPPSRC = $(PROJCPPSRC)
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
@@ -121,11 +124,12 @@ TCSRC =
 TCPPSRC =
 
 # List ASM source files here
-ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
+ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM) $(PROJASMSRC) src/arm-cortex-tools/fault_v7m.s
 
 INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) \
-         $(CHIBIOS)/os/various src
+         $(CHIBIOS)/os/various $(CHIBIOS)/os/hal/lib/streams \
+         $(PROJINC)
 
 #
 # Project, sources and paths
