@@ -93,7 +93,6 @@ CSRC = $(STARTUPSRC) \
        $(OSALSRC) \
        $(HALSRC) \
        $(PLATFORMSRC) \
-       $(BOARDSRC) \
        src/board.c \
        src/main.c
 
