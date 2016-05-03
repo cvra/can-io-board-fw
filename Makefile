@@ -97,6 +97,7 @@ CSRC = $(STARTUPSRC) \
        $(HALSRC) \
        $(PLATFORMSRC) \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
+       $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(PROJCSRC) src/arm-cortex-tools/fault.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global

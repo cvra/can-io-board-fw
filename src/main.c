@@ -7,6 +7,8 @@
 #include <cmp_mem_access/cmp_mem_access.h>
 #include <cmp/cmp.h>
 #include <arm-cortex-tools/fault.h>
+#include <memstreams.h>
+#include <stdarg.h>
 
 BaseSequentialStream *stdout = NULL;
 
@@ -144,17 +146,51 @@ THD_FUNCTION(imu_thread_main, arg)
     }
 }
 
+char panic_log[500];
+MemoryStream panic_log_stream;
+
+void panic_log_init(void)
+{
+    memset(&panic_log[0], 0, sizeof(panic_log));
+    // initialize stream object with buffer
+    msObjectInit(&panic_log_stream, (uint8_t *)&panic_log[0],
+        sizeof(panic_log) - 1, 0); // size - 1 for null terminated message
+}
+
 void fault_printf(const char *fmt, ...)
 {
-    (void)fmt;
+    va_list ap;
+    va_start(ap, fmt);
+    chvprintf((BaseSequentialStream *)&panic_log_stream, fmt, ap);
+    va_end(ap);
 }
+
+
+#define BOOT_ARG_START_BOOTLOADER               0x00
+#define BOOT_ARG_START_BOOTLOADER_NO_TIMEOUT    0x01
+#define BOOT_ARG_START_APPLICATION              0x02
+#define BOOT_ARG_START_ST_BOOTLOADER            0x03
+
+#define BOOT_ARG_MAGIC_VALUE_LO 0x01234567
+#define BOOT_ARG_MAGIC_VALUE_HI 0x0089abcd
+
+void reboot_system(uint8_t arg)
+{
+    uint32_t *ram_start = (uint32_t *)0x20000000;
+
+    ram_start[0] = BOOT_ARG_MAGIC_VALUE_LO;
+    ram_start[1] = BOOT_ARG_MAGIC_VALUE_HI | (arg << 24);
+
+    NVIC_SystemReset();
+}
+
 
 void panic_hook(const char *reason)
 {
     (void)reason;
-    // NVIC_SystemReset();
-    palSetPad(GPIOA, GPIOA_LED);
-    while (1);
+    reboot_system(BOOT_ARG_START_APPLICATION);
+    // palSetPad(GPIOA, GPIOA_LED);
+    // while (1);
 }
 
 static const SerialConfig debug_serial_config =
@@ -178,6 +214,7 @@ int main(void)
     halInit();
     chSysInit();
     fault_init();
+    panic_log_init();
 
     // UART1: TX=PB6  RX=PB7
     palSetPadMode(GPIOB, GPIOB_PIN6, PAL_MODE_ALTERNATE(7) |
