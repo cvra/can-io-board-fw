@@ -9,6 +9,7 @@
 #include <arm-cortex-tools/fault.h>
 #include <memstreams.h>
 #include <stdarg.h>
+#include <string.h>
 
 BaseSequentialStream *stdout = NULL;
 
@@ -60,7 +61,9 @@ void exti_setup(void)
 void send_fn(void *arg, const void *p, size_t len)
 {
     (void)arg;
-    chSequentialStreamWrite((BaseSequentialStream *)&SD2, (uint8_t *)p, len);
+    if (len > 0) {
+        chSequentialStreamWrite((BaseSequentialStream *)&SD2, (uint8_t *)p, len);
+    }
 }
 
 static THD_WORKING_AREA(imu_thread, 256);
