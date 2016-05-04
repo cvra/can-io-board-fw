@@ -139,8 +139,6 @@ THD_FUNCTION(imu_thread_main, arg)
             cmp_write_float(&ctx, acc[2]);
             size_t len = cmp_mem_access_get_pos(&cma);
             serial_datagram_send(dtgrm, len, send_fn, NULL);
-            chprintf(stdout, "%d\n", (int)(acc[0]*1000));
-
         } else {
             chSysHalt("IMU timeout\n");
         }
@@ -249,7 +247,6 @@ int main(void)
 
     stdout = (BaseSequentialStream *)&SD1;
     chprintf(stdout, "\nboot\n");
-    chprintf((BaseSequentialStream *)&SD2, "\nboot\n");
 
     chThdCreateStatic(imu_thread, sizeof(imu_thread), NORMALPRIO, imu_thread_main, NULL);
     while (1) {
